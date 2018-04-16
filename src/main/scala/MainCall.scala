@@ -29,6 +29,7 @@ object MainCall {
       .withColumn("Min_value", Extract.minValue(col("valueInt"), when(lag(col("Value").cast("Double"), 1).over(windowSpec).isNull, 0).otherwise(lag(col("Value").cast("Double"), 1).over(windowSpec))))
       .withColumn("Max_value", Extract.minValue(col("valueInt"), when(lag(col("Value").cast("Double"), 1).over(windowSpec).isNull, 0)
         .otherwise(lag(col("Value").cast("Double"), 1).over(windowSpec))))
+      .drop("diff_Sec_With_Prev_Row_Int")
       .drop("diff_With_Prev_Row")
       .drop("diff_Sec_With_Prev_Row")
       .drop("valueInt")
